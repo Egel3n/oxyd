@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      body {
+        font-family: sans-serif;
+        text-align: center;
+        font-size: larger;
+      }
+
+      .styled-table {
+        border-collapse: collapse;
+        margin: 25px 0;
+        font-size: 0.9em;
+        font-family: sans-serif;
+        min-width: 400px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+        margin-left: auto;
+        margin-right: auto;
+        overflow-y: auto;
+        height: 100px;
+      }
+
+      .styled-table thead tr {
+        background-color: #009879;
+        color: #ffffff;
+        text-align: left;
+      }
+
+      .styled-table th,
+      .styled-table td {
+        padding: 12px 15px;
+      }
+
+      styled-table tbody tr {
+        border-bottom: 1px solid #dddddd;
+      }
+
+      .styled-table tbody tr:nth-of-type(even) {
+        background-color: #f3f3f3;
+      }
+
+      .styled-table tbody tr:last-of-type {
+        border-bottom: 2px solid #009879;
+      }
+
+      .title {
+        text-align: center;
+      }
+      #wrapper {
+        width: 500px;
+        overflow: hidden; /* will contain if #first is longer than #second */
+        margin: auto;
+        width: 50%;
+        padding: 10px;
+      }
+      #first {
+        width: 250px;
+        float: left; /* add this */
+        padding: 20px 100px 20px 100px;
+      }
+      #second {
+        width: 250px;
+        padding: 20px 100px 20px 100px;
+        overflow: hidden; /* if you don't want #second to wrap below #first */
+      }
+
+      input {
+        width: 75%;
+        height: 36px;
+        border-radius: 4px;
+        padding-left: 12px;
+        font-size: 14px;
+        font-weight: normal;
+        border: 1px solid rgb(137, 151, 155);
+        transition: border-color 150ms ease-in-out 0s;
+        outline: none;
+        color: rgb(33, 49, 60);
+        background-color: rgb(255, 255, 255);
+        padding-right: 12px;
+        :hover {
+          box-shadow: rgb(231 238 236) 0px 0px 0px 3px;
+        }
+        margin: 12px;
+      }
+      #searchButton {
+        width: 50%;
+      }
+      #searchButton:hover {
+        background-color: #009879;
+        color: white;
+        cursor: pointer;
+      }
+    </style>
+
+    <title>Database Management</title>
+  </head>
+  <body>
+    <form action="/" method="post" id="main-form">
+      <div id="wrapper">
+        <div id="first">
+          <label for="username">Username:</label><br />
+          <input
+            autocomplete="off"
+            placeholder="search by username"
+            name="username"
+          /><br />
+
+          <label for="query">Query:</label><br />
+          <input
+            autocomplete="off"
+            placeholder="search by query"
+            name="query"
+          /><br />
+
+          <label for="hostname">Hostname:</label><br />
+          <input
+            autocomplete="off"
+            placeholder="search by hostname"
+            name="hostname"
+          /><br />
+
+          <label for="appname">Appname:</label><br />
+          <input
+            autocomplete="off"
+            placeholder="search by appname"
+            name="appname"
+          /><br />
+
+          <label for="databaseID">DatabaseID:</label><br />
+          <input
+            autocomplete="off"
+            placeholder="search by databaseID"
+            name="databaseID"
+          /><br />
+        </div>
+
+        <div id="second">
+          <label for="durationFrom">Duration:</label><br />
+          <input
+            autocomplete="off"
+            placeholder="From"
+            name="durationFrom"
+          /><br />
+          <input autocomplete="off" placeholder="To" name="durationTo" /><br />
+
+          <label for="dateFrom">Date:</label><br />
+          <input
+            autocomplete="off"
+            placeholder="From"
+            name="dateFrom"
+            type="date"
+          /><br />
+          <input
+            autocomplete="off"
+            placeholder="To"
+            name="dateTo"
+            type="date"
+          /><br />
+
+          <label for="sessionID">SessionID:</label><br />
+          <input
+            autocomplete="off"
+            placeholder="search by sessionID"
+            name="sessionID"
+          /><br />
+        </div>
+      </div>
+      <input type="submit" value="Search" id="searchButton" /><br />
+    </form>
+
+    <div id="bottom">
+      <h3 class="title">RECORDS</h3>
+      <table class="styled-table">
+        <tr>
+          {% for header in headers%}
+          <th>{{header}}</th>
+          {% endfor %}
+        </tr>
+        {%for record in records%}
+        <tr>
+          <td>{{record.EventDate}}</td>
+          <td>{{record.DatabaseID}}</td>
+          <td>{{record.Hostname}}</td>
+          <td>{{record.AppName}}</td>
+          <td>{{record.SessionID}}</td>
+          <td>{{record.UserName}}</td>
+          <td>{{record.SqlText}}</td>
+          <td>{{record.Duration}}</td>
+        </tr>
+        {%endfor%}
+      </table>
+    </div>
+  </body>
+</html>
