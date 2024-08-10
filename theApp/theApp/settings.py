@@ -81,20 +81,6 @@ WSGI_APPLICATION = 'theApp.wsgi.application'
 #     }
 # }
 
-DATABASES = {
-    'default':{
-        'ENGINE':'mssql',
-        'NAME':'oxyd',
-        'USER':'',                     # Here
-        'PASSWORD':'',                 # Here
-        'HOST':'EGELEN\SQLEXPRESS', # Here
-        # 'PORT':'',                   # Here      
-        'OPTIONS': {
-            'driver': 'ODBC Driver 17 for SQL Server',
-        },
-    }
-}
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
